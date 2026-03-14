@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Incumplimiento de la Ley 27795</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0ea5e9;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #10b981;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .start-date {
+            color: #0ea5e9;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .time-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .time-unit {
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .time-unit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .time-value {
+            font-size: 3em;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .time-label {
+            font-size: 1em;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-text {
+            background: #e0f2fe;
+            color: #0ea5e9;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            margin: 30px 0;
+            border-left: 5px solid #10b981;
+            font-weight: 600;
+        }
+
+        .demand-box {
+            background: #f0fdf4;
+            color: #047857;
+            padding: 25px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            margin: 30px 0;
+            border: 3px solid #10b981;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .demand-box strong {
+            color: #0ea5e9;
+            font-weight: 700;
+        }
+
+        .info {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .time-value {
+                font-size: 2em;
+            }
+
+            .time-display {
+                grid-template-columns: 1fr;
+            }
+
+            .demand-box {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⏱️ Contador de Incumplimiento de la Ley 27795</h1>
+        <p class="subtitle">El Gobierno Nacional NO cumple con la Ley hace:</p>
+        <p class="start-date">📅 La ley está vigente desde el 21 de octubre de 2025</p>
+
+        <div class="time-display">
+            <div class="time-unit">
+                <div class="time-value" id="days">0</div>
+                <div class="time-label">Días</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="hours">0</div>
+                <div class="time-label">Horas</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="minutes">0</div>
+                <div class="time-label">Minutos</div>
+            </div>
+        </div>
+
+        <div class="result-text" id="resultText">
+            La Universidad Pública no puede esperar más. 🇦🇷
+        </div>
+
+        <div class="demand-box">
+            <strong>Desde ATUNH exigimos:</strong><br>
+            El inmediato cumplimiento de la Ley de Financiamiento Universitario<br>
+            En defensa de la Educación superior<br>
+            Por salarios dignos<br>
+            Por el futuro de nuestra Patria
+        </div>
+
+        <p class="info">
+            ⏰ Se actualiza automáticamente cada minuto
+        </p>
+    </div>
+
+    <script>
+        function calculateElapsedTime() {
+            // Fecha de inicio: 21 de octubre de 2025
+            const startDate = new Date('2025-10-21T00:00:00');
+            
+            // Fecha actual
+            const endDate = new Date();
+
+            // Diferencia en milisegundos
+            let diffMs = endDate - startDate;
+
+            // Calcular días
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            diffMs -= days * (1000 * 60 * 60 * 24);
+
+            // Calcular horas
+            const hours = Math.floor(diffMs / (1000 * 60 * 60));
+            diffMs -= hours * (1000 * 60 * 60);
+
+            // Calcular minutos
+            const minutes = Math.floor(diffMs / (1000 * 60));
+
+            // Actualizar el DOM
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+
+            // Actualizar texto de resultado
+            const resultText = `${days} Días, ${hours} Horas y ${minutes} Minutos - La Universidad Pública no puede esperar más. 🇦🇷`;
+            document.getElementById('resultText').textContent = resultText;
+        }
+
+        // Calcular al cargar la página
+        calculateElapsedTime();
+
+        // Actualizar cada minuto (60000 milisegundos)
+        setInterval(calculateElapsedTime, 60000);
+    </script>
+</body>
+</html>
